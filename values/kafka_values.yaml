@@ -1,0 +1,5 @@
+topicname: events
+groupid: my_group
+brokers:
+  - first_channel
+  - second_channel
