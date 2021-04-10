@@ -1,6 +1,7 @@
 package pg_client
 
 import (
+	"database/sql"
 	"io/ioutil"
 
 	"gopkg.in/yaml.v2"
@@ -23,7 +24,8 @@ func (dc *databaseConfig) Init(pathToConfig string) error {
 }
 
 type pgClient struct {
-	Client *sql.database
+	// Client *sql.database
+	Client *sql.DB
 }
 
 func New(pathToConfig string) (IPgClient, error) {
@@ -32,7 +34,7 @@ func New(pathToConfig string) (IPgClient, error) {
 		return nil, err
 	}
 	return &pgClient{
-		Client: nil,
+		Client: sql.OpenDB(),
 	}, nil
 }
 
