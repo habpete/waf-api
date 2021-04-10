@@ -1,23 +1,41 @@
 package pg_client
 
-type pgClient struct {}
+import (
+	"io/ioutil"
 
-func New () IPgClient {
-	return &pgClient{}
+	"gopkg.in/yaml.v2"
+)
+
+type databaseConfig struct {
+	DBname   string
+	Port     int
+	Host     string
+	Username string
+	Password string
 }
 
-func (pc *pgClient) SELECT () (interface, error) {
-	return nil, nil
+func (dc *databaseConfig) Init(pathToConfig string) error {
+	content, err := ioutil.ReadFile(pathToConfig)
+	if err != nil {
+		return err
+	}
+	return yaml.Unmarshal(content, err)
 }
 
-func (pc *pgClient) INSERT () (interface, error) {
-	return nil, nil
+type pgClient struct {
+	Client *sql.database
 }
 
-func (pc *pgClient) UPDATE () (interface, error) {
-	return nil, nil
+func New(pathToConfig string) (IPgClient, error) {
+	cfg := &databaseConfig{}
+	if err := cfg.Init(pathToConfig); err != nil {
+		return nil, err
+	}
+	return &pgClient{
+		Client: nil,
+	}, nil
 }
 
-func (pc *pgClient) DELETE () (interface, error) {
+func (pc *pgClient) QUERY(queryString string) (interface{}, error) {
 	return nil, nil
 }

@@ -1,3 +1,5 @@
 package pg_client
 
-type IPgClient interface {}
+type IPgClient interface {
+	QUERY (queryString string) (interface, error)
+}

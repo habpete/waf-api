@@ -4,6 +4,8 @@ CREATE TABLE main (
     query_type_id bigint FOREIGN KEY
     query_url_id bigint FOREIGN KEY
     session_ids_id bigint FOREIGN KEY
+    start_query_time timestamp
+    finish_query_time timestamp
 )
 
 CREATE TABLE ip_address(

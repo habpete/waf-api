@@ -42,7 +42,7 @@ func New () (IKafkaClient, error) {
 			Brokers: cfg.Brokers,
 			Topic: cfg.TopicName,
 			GroupID: cfg.GroupID,
-		})
+		}),
 	}, nil
 }
 
