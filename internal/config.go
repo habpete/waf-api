@@ -1,8 +1,22 @@
 package internal
 
+import (
+	"io/ioutil"
+
+	"gopkg.in/yaml.v2"
+)
+
 type serviceConfig struct {
-	ROdatabase interface
-	WOdatabase interface
+	ROdatabaseConfig string,
+	WOdatabaseConfig string,
 
 	servicePort int
+}
+
+func (sc *serviceserviceConfig) Init () error {
+	content, err := ioutil.ReadFile("")
+	if err != nil {
+		return err
+	}
+	return yaml.Unmarshal(content, sc)
 }

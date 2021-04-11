@@ -1,6 +1,6 @@
 package reports
 
-const getDataQuery = "
+const getDataQuery := "
 	SELECT M.id, IPA.value, QT.value, 
 	QU.value, SII.value, M.start_query_time, 
 	M.finish_query_time FROM public.main AS M 

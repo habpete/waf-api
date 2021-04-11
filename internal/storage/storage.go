@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"context"
 	"fmt"
 	kafka_client "waf/utils/kafka"
 )
@@ -28,7 +29,12 @@ func New(pathToConfig string) (IStorage, error) {
 	}, nil
 }
 
-func (s *storage) Writer() {
+func (s *storage) StartStorage(ctx context.Context) {
+	go s.Consumer.Consumer(ctx, s.msgChannel)
+	go s.Write()
+}
+
+func (s *storage) Write() {
 	select {
 	case msg := <-s.msgChannel:
 		_, err := s.Writer.QUERY(insertIntoMainQuery)
